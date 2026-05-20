@@ -9,7 +9,7 @@
 
 O **PetCare IoT** é um sistema de monitoramento ambiental para pets desenvolvido em parceria com a empresa **Clyvo**, que busca tornar seu aplicativo de pets genuinamente útil e adotado pelos clientes.
 
-O problema central: aplicativos de pets existem, mas são ignorados por não oferecerem funcionalidade real no dia a dia do tutor. Nossa solução traz dados concretos do ambiente onde o pet vive — temperatura, umidade, presença e alertas automáticos — diretamente para o tutor, tornando o app indispensável.
+O problema central: Tutores de pets precisam sair de casa para trabalhar e não têm como saber se o ambiente onde o pet fica está seguro e confortável. Nossa solução resolve isso através de uma assinatura premium do app Clyvo: o assinante recebe um dispositivo físico em casa que monitora temperatura, umidade e presença do pet em tempo real, enviando alertas automáticos direto para o celular do tutor.
 
 > *"Trazer para os clientes o app de pets que eles precisam e não sabiam que precisavam."*
 
