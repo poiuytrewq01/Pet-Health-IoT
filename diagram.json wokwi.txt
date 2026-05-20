@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "author": "PetCare IoT",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht1", "top": 100, "left": -160, "attrs": {} },
+    { "type": "wokwi-pir-motion-sensor", "id": "pir1", "top": 100, "left": 160, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": 200, "left": 0, "attrs": { "color": "red" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 170, "left": -30, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    ["esp:GND.1", "dht1:GND", "black", []],
+    ["esp:3V3", "dht1:VCC", "red", []],
+    ["esp:15", "dht1:SDA", "green", []],
+    ["esp:GND.2", "pir1:GND", "black", []],
+    ["esp:5V", "pir1:VCC", "red", []],
+    ["esp:14", "pir1:OUT", "yellow", []],
+    ["esp:2", "r1:1", "orange", []],
+    ["r1:2", "led1:A", "orange", []],
+    ["led1:C", "esp:GND.3", "black", []]
+  ]
+}

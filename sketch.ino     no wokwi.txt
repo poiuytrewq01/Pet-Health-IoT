@@ -1,0 +1,109 @@
+#include <WiFi.h>
+#include <PubSubClient.h>
+#include <DHT.h>
+
+
+const char* ssid     = "Wokwi-GUEST";
+const char* password = "";
+
+const char* mqtt_server = "broker.hivemq.com";
+const int   mqtt_port   = 1883;
+const char* client_id   = "petcare-esp32-001";
+
+const char* topic_temp  = "petcare/ambiente/temperatura";
+const char* topic_umid  = "petcare/ambiente/umidade";
+const char* topic_mov   = "petcare/ambiente/movimento";
+const char* topic_alert = "petcare/alerta";
+
+#define DHTPIN  15
+#define DHTTYPE DHT22
+#define PIR_PIN 14
+#define LED_PIN 2
+
+DHT dht(DHTPIN, DHTTYPE);
+WiFiClient espClient;
+PubSubClient client(espClient);
+
+const float TEMP_MAX = 28.0;
+const float TEMP_MIN = 18.0;
+const float UMID_MAX = 70.0;
+const float UMID_MIN = 40.0;
+
+void setup_wifi() {
+  Serial.print("Conectando ao Wi-Fi");
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("\nConectado! IP: " + WiFi.localIP().toString());
+}
+
+void reconnect() {
+  while (!client.connected()) {
+    Serial.print("Conectando ao MQTT...");
+    if (client.connect(client_id)) {
+      Serial.println("Conectado!");
+      client.publish("petcare/status", "ESP32 online");
+    } else {
+      Serial.print("Falha, rc=");
+      Serial.print(client.state());
+      delay(3000);
+    }
+  }
+}
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(PIR_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
+  dht.begin();
+  setup_wifi();
+  client.setServer(mqtt_server, mqtt_port);
+}
+
+void loop() {
+  if (!client.connected()) reconnect();
+  client.loop();
+
+  float temp = dht.readTemperature();
+  float umid = dht.readHumidity();
+  int   mov  = digitalRead(PIR_PIN);
+
+  if (isnan(temp) || isnan(umid)) {
+    Serial.println("Erro ao ler DHT22");
+    delay(2000);
+    return;
+  }
+
+  char buf_temp[8];
+  dtostrf(temp, 4, 1, buf_temp);
+  client.publish(topic_temp, buf_temp);
+
+  char buf_umid[8];
+  dtostrf(umid, 4, 1, buf_umid);
+  client.publish(topic_umid, buf_umid);
+
+  client.publish(topic_mov, mov ? "1" : "0");
+
+  bool alerta = false;
+  String motivo = "";
+
+  if (temp > TEMP_MAX) { alerta = true; motivo = "CALOR_EXCESSIVO"; }
+  if (temp < TEMP_MIN) { alerta = true; motivo = "FRIO_EXCESSIVO"; }
+  if (umid > UMID_MAX) { alerta = true; motivo = "UMIDADE_ALTA"; }
+  if (umid < UMID_MIN) { alerta = true; motivo = "UMIDADE_BAIXA"; }
+
+  if (alerta) {
+    client.publish(topic_alert, motivo.c_str());
+    digitalWrite(LED_PIN, HIGH); 
+  } else {
+    client.publish(topic_alert, "OK");
+    digitalWrite(LED_PIN, LOW);
+  }
+
+  Serial.printf("Temp: %.1f°C | Umid: %.1f%% | Mov: %d | Alerta: %s\n",
+                temp, umid, mov, alerta ? motivo.c_str() : "OK");
+
+  delay(5000); 
+}
