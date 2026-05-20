@@ -1,11 +1,11 @@
-# 🐾 PetCare IoT — Pet Health Monitor
+PetCare IoT — Pet Health Monitor
 
 > Projeto desenvolvido para a disciplina **Disruptive Architectures: IoT, IoB & Generative IA** — FIAP  
 > **1º Sprint**
 
 ---
 
-## 📋 Sobre o Projeto
+Sobre o Projeto
 
 O **PetCare IoT** é um sistema de monitoramento ambiental para pets desenvolvido em parceria com a empresa **Clyvo**, que busca tornar seu aplicativo de pets genuinamente útil e adotado pelos clientes.
 
@@ -15,7 +15,7 @@ O problema central: Tutores de pets precisam sair de casa para trabalhar e não 
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+Tecnologias Utilizadas
 
 | Tecnologia | Aplicação |
 |---|---|
@@ -29,7 +29,7 @@ O problema central: Tutores de pets precisam sair de casa para trabalhar e não 
 
 ---
 
-## 🔌 Circuito
+Circuito
 
 | Componente | Pino ESP32 |
 |---|---|
@@ -39,7 +39,7 @@ O problema central: Tutores de pets precisam sair de casa para trabalhar e não 
 
 ---
 
-## 📡 Tópicos MQTT
+Tópicos MQTT
 
 | Tópico | Descrição |
 |---|---|
@@ -50,7 +50,7 @@ O problema central: Tutores de pets precisam sair de casa para trabalhar e não 
 
 ---
 
-## ⚠️ Lógica de Alertas
+Lógica de Alertas
 
 | Condição | Alerta |
 |---|---|
@@ -62,7 +62,7 @@ O problema central: Tutores de pets precisam sair de casa para trabalhar e não 
 
 ---
 
-## 🖥️ Dashboard Node-RED
+Dashboard Node-RED
 
 O dashboard exibe em tempo real:
 - Gauge de temperatura (0–50°C)
@@ -75,7 +75,7 @@ O dashboard exibe em tempo real:
 
 ---
 
-## ▶️ Como Executar
+Como Executar
 
 ### Simulação (Wokwi)
 1. Acesse o projeto no Wokwi: [link do projeto](https://wokwi.com/projects/463315521353108481)
@@ -91,7 +91,7 @@ O dashboard exibe em tempo real:
 
 ---
 
-## 👥 Integrantes
+Integrantes
 
 | Nome | RM |
 |---|---|
@@ -102,7 +102,7 @@ O dashboard exibe em tempo real:
 
 ---
 
-## 📊 Resultados Parciais
+Resultados Parciais
 
 - ✅ Protótipo simulado funcional no Wokwi
 - ✅ Comunicação MQTT estabelecida com broker público HiveMQ
@@ -110,6 +110,6 @@ O dashboard exibe em tempo real:
 - ✅ Sistema de alertas automáticos por temperatura e umidade
 - ✅ Detecção de movimento do pet via sensor PIR
 
----
 
-*FIAP — 2025/2026*
+
+
