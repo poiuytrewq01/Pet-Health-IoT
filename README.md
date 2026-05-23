@@ -87,7 +87,7 @@ Como Executar
 3. Inicie: `node-red`
 4. Importe o arquivo `flows.json` via **Menu → Import**
 5. Clique em **Deploy**
-6. Acesse o dashboard em `http://localhost:1880/ui`
+6. Acesse o dashboard em `executado localmente em http://127.0.0.1:1880/ui`
 
 ---
 
@@ -99,6 +99,8 @@ Integrantes
 | Matheus Arazin de Oliveira | 556649 |
 | Pedro Gabriel Claes | 566058 |
 | Kevin Martins Campos | 563454 |
+
+(VIDEO YT https:(//youtu.be/Gc0b6vTI4XM?si=DK8uSRjMqADsw76U))
 
 ---
 
